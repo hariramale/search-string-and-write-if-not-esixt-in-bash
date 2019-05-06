@@ -1,0 +1,20 @@
+#!/bin/bash
+email=$1
+address=$2
+#checking action from user
+if [ $address == 'add' ];then
+	#check duplicate string from valid file
+	if grep -q "$email" valid; then
+    	echo "Email address $email is already exist!!"
+	else
+	#write email address in valid file, if it is not alredy exist.
+   	 echo echo $email "   OK">> valid
+	echo "'$email' successfully inserted into valid file.."
+	fi
+#cehck remove action from user and delete it from valid file
+elif [ $address == 'rm' ];then
+sed -i '\|'^$email'|d' valid
+#echo $address >> valid
+else
+echo 'Invalid format, please use Script name <space> <add/rm> < > email address'
+fi
